@@ -1,7 +1,7 @@
 package com.oktay.productservice.controllers;
 
 
-import com.oktay.productservice.dto.Product;
+import dtos.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +15,11 @@ import java.util.List;
 public class ProductController {
 
     @GetMapping
-    public ResponseEntity findProducts(){
+    public ResponseEntity<List<Product>> findProducts(){
         List<Product> products = new ArrayList<>();
         products.add(new Product("1","airpods"));
         products.add(new Product("2","macbook"));
-        return ResponseEntity.ok(products.toString());
+        return ResponseEntity.ok(products);
     }
 
 }

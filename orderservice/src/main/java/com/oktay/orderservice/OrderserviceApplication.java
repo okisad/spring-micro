@@ -2,8 +2,10 @@ package com.oktay.orderservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -14,6 +16,8 @@ import java.net.Proxy;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableOAuth2Sso
+@EnableFeignClients
 public class OrderserviceApplication {
 
     public static void main(String[] args) {
@@ -27,10 +31,7 @@ public class OrderserviceApplication {
         @Bean
         @LoadBalanced
         public RestTemplate restTemplate() {
-            SimpleClientHttpRequestFactory clientHttpReq = new SimpleClientHttpRequestFactory();
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy.eu.sony.com", 10080));
-            clientHttpReq.setProxy(proxy);
-            return new RestTemplate(clientHttpReq);
+            return new RestTemplate();
         }
     }
 
