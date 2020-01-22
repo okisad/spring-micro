@@ -1,3 +1,7 @@
-FROM alpine:latest
+FROM alpine/git
 WORKDIR /app
-COPY /app /Users/oktaysahinsadoglu/Projects/tutorial/spring/spring-micro/registry-service
+RUN git clone https://github.com/okisad/spring-micro.git
+
+#FROM maven:latest
+#WORKDIR /app/spring-micro/registry-service
+#RUN mvn install
